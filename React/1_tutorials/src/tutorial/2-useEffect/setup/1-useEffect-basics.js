@@ -3,7 +3,23 @@ import React, { useState, useEffect } from 'react';
 // cleanup function
 // second parameter
 const UseEffectBasics = () => {
-  return <h2>useEffect Basics</h2>;
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    console.log('ahaha');
+    if (value > 0) document.title = `New Messages(${value})`;
+  }, [value]);
+
+  console.log('render component');
+
+  return (
+    <>
+      <h1>{value}</h1>
+      <button className="btn" onClick={() => setValue(value + 1)}>
+        Increase vakue
+      </button>
+    </>
+  );
 };
 
 export default UseEffectBasics;
