@@ -4,7 +4,21 @@ import Categories from './Categories';
 import items from './data';
 
 function App() {
-  return <h2>menu project setup</h2>;
+  const [menuItmes, setMenuItmes] = useState(items);
+  const [categories, setCategories] = useState([]);
+
+  return (
+    <menu>
+      <section className="memu section">
+        <div className="title">
+          <h2 className="">our menu</h2>
+          <div className="underline"></div>
+        </div>
+        <Categories />
+        <Menu items={menuItmes} />
+      </section>
+    </menu>
+  );
 }
 
 export default App;
