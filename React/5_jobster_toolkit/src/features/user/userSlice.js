@@ -5,12 +5,7 @@ import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from '../../utils/localStorage';
-import {
-  loginUserThunk,
-  registerUserThunk,
-  updateUserThunk,
-  clearStoreThunk,
-} from './userThunk';
+import { loginUserThunk, registerUserThunk, updateUserThunk, clearStoreThunk } from './userThunk';
 
 const initialState = {
   isLoading: false,
@@ -18,26 +13,17 @@ const initialState = {
   user: getUserFromLocalStorage(),
 };
 
-export const registerUser = createAsyncThunk(
-  'user/registerUser',
-  async (user, thunkAPI) => {
-    return registerUserThunk('/auth/register', user, thunkAPI);
-  }
-);
+export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
+  return registerUserThunk('/auth/register', user, thunkAPI);
+});
 
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (user, thunkAPI) => {
-    return loginUserThunk('/auth/login', user, thunkAPI);
-  }
-);
+export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAPI) => {
+  return loginUserThunk('/auth/login', user, thunkAPI);
+});
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (user, thunkAPI) => {
-    return updateUserThunk('/auth/updateUser', user, thunkAPI);
-  }
-);
+export const updateUser = createAsyncThunk('user/updateUser', async (user, thunkAPI) => {
+  return updateUserThunk('/auth/updateUser', user, thunkAPI);
+});
 export const clearStore = createAsyncThunk('user/clearStore', clearStoreThunk);
 const userSlice = createSlice({
   name: 'user',
