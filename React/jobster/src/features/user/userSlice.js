@@ -7,11 +7,6 @@ import {
   removeUserFromLocalStorage,
 } from './../../utils/localStorage';
 
-const initialState = {
-  isLoading: false,
-  user: getUserFromLocalStorage(),
-};
-
 export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
   try {
     const resp = await customFetch.post('/auth/testingRegister', user);
@@ -29,10 +24,26 @@ export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAP
   }
 });
 
+const initialState = {
+  isLoading: false,
+  isSidebarOpen: false,
+  user: getUserFromLocalStorage(),
+};
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state) => {
+      state.user = null;
+      state.isSidebarOpen = false;
+      removeUserFromLocalStorage();
+    },
+
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+  },
   extraReducers: {
     [registerUser.pending]: (state) => {
       state.isLoading = true;
@@ -64,5 +75,7 @@ const userSlice = createSlice({
     },
   },
 });
+
+export const { logoutUser, toggleSidebar } = userSlice.actions;
 
 export default userSlice.reducer;
