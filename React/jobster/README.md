@@ -16,7 +16,7 @@ Find the App Useful? [You can always buy me a coffee](https://www.buymeacoffee.c
 npm run install && npm start
 ```
 
-- visit url http://localhost:3000/
+- visit url <http://localhost:3000/>
 
 #### Setup React App
 
@@ -363,13 +363,7 @@ const FormRow = ({ type, name, value, handleChange, labelText }) => {
         {labelText || name}
       </label>
 
-      <input
-        type={type}
-        value={value}
-        name={name}
-        onChange={handleChange}
-        className='form-input'
-      />
+      <input type={type} value={value} name={name} onChange={handleChange} className='form-input' />
     </div>
   );
 };
@@ -393,12 +387,7 @@ return (
     {/* toggle name */}
 
     {!values.isMember && (
-      <FormRow
-        type='text'
-        name='name'
-        value={values.name}
-        handleChange={handleChange}
-      />
+      <FormRow type='text' name='name' value={values.name} handleChange={handleChange} />
     )}
 
     {/* right after submit btn */}
@@ -606,13 +595,13 @@ npm install axios
 #### 25) API
 
 - Root URL
-- https://jobify-prod.herokuapp.com/api/v1/toolkit
+- <https://jobify-prod.herokuapp.com/api/v1/toolkit>
 
 - NODE COURSE
 
 ###### Register USER
 
-- https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/register
+- <https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/register>
 
 - POST /auth/register
 - {name:'john',email:'john@gmail.com',password:'secret'}
@@ -655,17 +644,14 @@ userSlice.js
 ```js
 import customFetch from '../../utils/axios';
 
-export const registerUser = createAsyncThunk(
-  'user/registerUser',
-  async (user, thunkAPI) => {
-    try {
-      const resp = await customFetch.post('/auth/testingRegister', user);
-      console.log(resp);
-    } catch (error) {
-      console.log(error.response);
-    }
+export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
+  try {
+    const resp = await customFetch.post('/auth/testingRegister', user);
+    console.log(resp);
+  } catch (error) {
+    console.log(error.response);
   }
-);
+});
 ```
 
 #### 27) Register User
@@ -869,13 +855,7 @@ const Register = () => {
 App.js
 
 ```js
-import {
-  AllJobs,
-  Profile,
-  SharedLayout,
-  Stats,
-  AddJob,
-} from './pages/dashboard';
+import { AllJobs, Profile, SharedLayout, Stats, AddJob } from './pages/dashboard';
 
 function App() {
   return (
@@ -982,11 +962,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className='nav-center'>
-        <button
-          type='button'
-          className='toggle-btn'
-          onClick={() => console.log('toggle sidebar')}
-        >
+        <button type='button' className='toggle-btn' onClick={() => console.log('toggle sidebar')}>
           <FaAlignLeft />
         </button>
         <div>
@@ -1262,9 +1238,7 @@ return (
       return (
         <NavLink
           to={path}
-          className={({ isActive }) =>
-            isActive ? 'nav-link active' : 'nav-link'
-          }
+          className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           key={id}
           onClick={toggle}
         >
@@ -1277,7 +1251,7 @@ return (
 );
 ```
 
-#### REACT ROUTER UPDATE !!!
+#### REACT ROUTER UPDATE
 
 - [Stack Overflow](https://stackoverflow.com/questions/70644361/react-router-dom-v6-shows-active-for-index-as-well-as-other-subroutes)
 
@@ -1315,9 +1289,7 @@ const NavLinks = ({ toggleSidebar }) => {
             to={path}
             key={id}
             onClick={toggleSidebar}
-            className={({ isActive }) =>
-              isActive ? 'nav-link active' : 'nav-link'
-            }
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
             <span className='icon'>{icon}</span>
             {text}
@@ -1351,13 +1323,7 @@ const BigSidebar = () => {
   const { isSidebarOpen } = useSelector((store) => store.user);
   return (
     <Wrapper>
-      <div
-        className={
-          isSidebarOpen
-            ? 'sidebar-container '
-            : 'sidebar-container show-sidebar'
-        }
-      >
+      <div className={isSidebarOpen ? 'sidebar-container ' : 'sidebar-container show-sidebar'}>
         <div className='content'>
           <header>
             <Logo />
@@ -1603,31 +1569,18 @@ export const updateUserThunk = async (url, user, thunkAPI) => {
 userSlice.js
 
 ```js
-import {
-  loginUserThunk,
-  registerUserThunk,
-  updateUserThunk,
-} from './userThunk';
+import { loginUserThunk, registerUserThunk, updateUserThunk } from './userThunk';
 
-export const registerUser = createAsyncThunk(
-  'user/registerUser',
-  async (user, thunkAPI) => {
-    return registerUserThunk('/auth/register', user, thunkAPI);
-  }
-);
+export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
+  return registerUserThunk('/auth/register', user, thunkAPI);
+});
 
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (user, thunkAPI) => {
-    return loginUserThunk('/auth/login', user, thunkAPI);
-  }
-);
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (user, thunkAPI) => {
-    return updateUserThunk('/auth/updateUser', user, thunkAPI);
-  }
-);
+export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAPI) => {
+  return loginUserThunk('/auth/login', user, thunkAPI);
+});
+export const updateUser = createAsyncThunk('user/updateUser', async (user, thunkAPI) => {
+  return updateUserThunk('/auth/updateUser', user, thunkAPI);
+});
 ```
 
 #### 50) Job Slice
@@ -1719,19 +1672,9 @@ const AddJob = () => {
 
         <div className='form-center'>
           {/* position */}
-          <FormRow
-            type='text'
-            name='position'
-            value={position}
-            handleChange={handleJobInput}
-          />
+          <FormRow type='text' name='position' value={position} handleChange={handleJobInput} />
           {/* company */}
-          <FormRow
-            type='text'
-            name='company'
-            value={company}
-            handleChange={handleJobInput}
-          />
+          <FormRow type='text' name='company' value={company} handleChange={handleJobInput} />
           {/* location */}
           <FormRow
             type='text'
@@ -1781,12 +1724,7 @@ return (
     <label htmlFor='status' className='form-label'>
       status
     </label>
-    <select
-      name='status'
-      value={status}
-      onChange={handleJobInput}
-      className='form-select'
-    >
+    <select name='status' value={status} onChange={handleJobInput} className='form-select'>
       {statusOptions.map((itemValue, index) => {
         return (
           <option key={index} value={itemValue}>
@@ -1808,13 +1746,7 @@ const FormRowSelect = ({ labelText, name, value, handleChange, list }) => {
       <label htmlFor={name} className='form-label'>
         {labelText || name}
       </label>
-      <select
-        name={name}
-        value={value}
-        id={name}
-        onChange={handleChange}
-        className='form-select'
-      >
+      <select name={name} value={value} id={name} onChange={handleChange} className='form-select'>
         {list.map((itemValue, index) => {
           return (
             <option key={index} value={itemValue}>
@@ -1899,11 +1831,7 @@ AddJob.js
 import { clearValues, handleChange } from '../../features/job/jobSlice';
 
 return (
-  <button
-    type='button'
-    className='btn btn-block clear-btn'
-    onClick={() => dispatch(clearValues())}
-  >
+  <button type='button' className='btn btn-block clear-btn' onClick={() => dispatch(clearValues())}>
     clear
   </button>
 );
@@ -1961,11 +1889,7 @@ extraReducers: {
 AddJob.js
 
 ```js
-import {
-  clearValues,
-  handleChange,
-  createJob,
-} from '../../features/job/jobSlice';
+import { clearValues, handleChange, createJob } from '../../features/job/jobSlice';
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -2245,15 +2169,7 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Job';
 import { useDispatch } from 'react-redux';
 
-const Job = ({
-  _id,
-  position,
-  company,
-  jobLocation,
-  jobType,
-  createdAt,
-  status,
-}) => {
+const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }) => {
   const dispatch = useDispatch();
 
   return (
@@ -2378,24 +2294,21 @@ jobSlice.js
 ```js
 import { showLoading, hideLoading, getAllJobs } from '../allJobs/allJobsSlice';
 
-export const deleteJob = createAsyncThunk(
-  'job/deleteJob',
-  async (jobId, thunkAPI) => {
-    thunkAPI.dispatch(showLoading());
-    try {
-      const resp = await customFetch.delete(`/jobs/${jobId}`, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-        },
-      });
-      thunkAPI.dispatch(getAllJobs());
-      return resp.data;
-    } catch (error) {
-      thunkAPI.dispatch(hideLoading());
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+export const deleteJob = createAsyncThunk('job/deleteJob', async (jobId, thunkAPI) => {
+  thunkAPI.dispatch(showLoading());
+  try {
+    const resp = await customFetch.delete(`/jobs/${jobId}`, {
+      headers: {
+        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+      },
+    });
+    thunkAPI.dispatch(getAllJobs());
+    return resp.data;
+  } catch (error) {
+    thunkAPI.dispatch(hideLoading());
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
-);
+});
 ```
 
 Job.js
@@ -2509,12 +2422,7 @@ extraReducers:{
 AddJob.js
 
 ```js
-import {
-  clearValues,
-  handleChange,
-  createJob,
-  editJob,
-} from '../../features/job/jobSlice';
+import { clearValues, handleChange, createJob, editJob } from '../../features/job/jobSlice';
 
 if (isEditing) {
   dispatch(
@@ -2703,11 +2611,7 @@ Register.js
 
 - GET /jobs/stats
 - authorization header : 'Bearer token'
-- returns
-  {
-  defaultStats:{pending:24,interview:27,declined:24},
-  monthlyApplications:[{date:"Nov 2021",count:5},{date:"Dec 2021",count:4} ]
-  }
+- returns { defaultStats:{pending:24,interview:27,declined:24}, monthlyApplications:[{date:"Nov 2021",count:5},{date:"Dec 2021",count:4} ] }
 - last six months
 
   allJobsSlice.js
@@ -2758,9 +2662,7 @@ import { StatsContainer, Loading, ChartsContainer } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { showStats } from '../../features/allJobs/allJobsSlice';
 const Stats = () => {
-  const { isLoading, monthlyApplications } = useSelector(
-    (store) => store.allJobs
-  );
+  const { isLoading, monthlyApplications } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(showStats());
@@ -2940,15 +2842,7 @@ export default AreaChartComponent;
 #### 81) BarChart.js
 
 ```js
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const BarChartComponent = ({ data }) => {
   return (
@@ -2977,8 +2871,9 @@ import Wrapper from '../assets/wrappers/SearchContainer';
 import { useSelector, useDispatch } from 'react-redux';
 
 const SearchContainer = () => {
-  const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
-    useSelector((store) => store.allJobs);
+  const { isLoading, search, searchStatus, searchType, sort, sortOptions } = useSelector(
+    (store) => store.allJobs
+  );
   const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
   const dispatch = useDispatch();
   const handleSearch = (e) => {};
@@ -2992,12 +2887,7 @@ const SearchContainer = () => {
         <div className='form-center'>
           {/* search position */}
 
-          <FormRow
-            type='text'
-            name='search'
-            value={search}
-            handleChange={handleSearch}
-          />
+          <FormRow type='text' name='search' value={search} handleChange={handleSearch} />
           {/* search by status */}
           <FormRowSelect
             labelText='status'
@@ -3015,17 +2905,8 @@ const SearchContainer = () => {
             list={['all', ...jobTypeOptions]}
           />
           {/* sort */}
-          <FormRowSelect
-            name='sort'
-            value={sort}
-            handleChange={handleSearch}
-            list={sortOptions}
-          />
-          <button
-            className='btn btn-block btn-danger'
-            disabled={isLoading}
-            onClick={handleSubmit}
-          >
+          <FormRowSelect name='sort' value={sort} handleChange={handleSearch} list={sortOptions} />
+          <button className='btn btn-block btn-danger' disabled={isLoading} onClick={handleSubmit}>
             clear filters
           </button>
         </div>
@@ -3097,9 +2978,7 @@ allJobsSlice.js
 JobsContainer
 
 ```js
-const { jobs, isLoading, page, totalJobs, numOfPages } = useSelector(
-  (store) => store.allJobs
-);
+const { jobs, isLoading, page, totalJobs, numOfPages } = useSelector((store) => store.allJobs);
 
 return (
   <Wrapper>
@@ -3248,17 +3127,8 @@ export const getAllJobs = createAsyncThunk(
 JobsContainer.js
 
 ```js
-const {
-  jobs,
-  isLoading,
-  page,
-  totalJobs,
-  numOfPages,
-  search,
-  searchStatus,
-  searchType,
-  sort,
-} = useSelector((store) => store.allJobs);
+const { jobs, isLoading, page, totalJobs, numOfPages, search, searchStatus, searchType, sort } =
+  useSelector((store) => store.allJobs);
 
 useEffect(() => {
   dispatch(getAllJobs());
@@ -3296,8 +3166,7 @@ const handleSearch = (e) => {
 import customFetch from '../../utils/axios';
 
 export const getAllJobsThunk = async (thunkAPI) => {
-  const { page, search, searchStatus, searchType, sort } =
-    thunkAPI.getState().allJobs;
+  const { page, search, searchStatus, searchType, sort } = thunkAPI.getState().allJobs;
 
   let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
   if (search) {
@@ -3631,12 +3500,7 @@ const SearchContainer = () => {
         <h4>search form</h4>
         <div className='form-center'>
           {/* search position */}
-          <FormRow
-            type='text'
-            name='search'
-            value={localSearch}
-            handleChange={optimizedDebounce}
-          />
+          <FormRow type='text' name='search' value={localSearch} handleChange={optimizedDebounce} />
           // ...rest of the code
         </div>
       </form>
