@@ -1,37 +1,51 @@
-import { logoutUser } from './userSlice';
-import { customFetch } from './../../utils/axios';
+import { logoutUser } from "./userSlice";
+import { checkForUnauthorizedResponse, customFetch } from "./../../utils/axios";
 
-export const registerUserThunk = async (url, user, Thunk) => {
+import { clearAllJobsState } from "../allJobs/allJobsSlice";
+import { clearValues } from "../job/jobSlice";
+
+export const registerUserThunk = async (url, user, thunkAPI) => {
   try {
     const resp = await customFetch.post(url, user);
     return resp.data;
   } catch (error) {
-    return Thunk.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
 
-export const loginUserThunk = async (url, user, Thunk) => {
+export const loginUserThunk = async (url, user, thunkAPI) => {
   try {
     const resp = await customFetch.post(url, user);
     return resp.data;
   } catch (error) {
-    return Thunk.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
 
-export const updateUserThunk = async (url, user, Thunk) => {
+export const updateUserThunk = async (url, user, thunkAPI) => {
   try {
     const resp = await customFetch.patch(url, user, {
       headers: {
-        authorization: `Bearer ${Thunk.getState().user.user.token}`,
+        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
       },
     });
     return resp.data;
   } catch (error) {
-    if (error.response.status === 401) {
-      Thunk.dispatch(logoutUser());
-      return Thunk.rejectWithValue('Unauthorized! Logging Out...');
-    }
-    return Thunk.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkAPI);
+  }
+};
+
+export const clearStoreThunk = async (message, thunkAPI) => {
+  try {
+    // logout user
+    thunkAPI.dispatch(logoutUser(message));
+    // clear jobs value
+    thunkAPI.dispatch(clearAllJobsState());
+    // clear job input values
+    thunkAPI.dispatch(clearValues());
+    return Promise.resolve();
+  } catch (error) {
+    // console.log(error);
+    return Promise.reject();
   }
 };

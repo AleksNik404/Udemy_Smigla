@@ -1,24 +1,39 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import {
+  loginUserThunk,
+  updateUserThunk,
+  registerUserThunk,
+  clearStoreThunk,
+} from "./userThunk";
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
   removeUserFromLocalStorage,
-} from './../../utils/localStorage';
-import { loginUserThunk, updateUserThunk, registerUserThunk } from './userThunk';
+} from "./../../utils/localStorage";
 
-export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
-  return registerUserThunk('/auth/register', user, thunkAPI);
-});
+export const registerUser = createAsyncThunk(
+  "user/registerUser",
+  async (user, thunkAPI) => {
+    return registerUserThunk("/auth/register", user, thunkAPI);
+  }
+);
 
-export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAPI) => {
-  return loginUserThunk('/auth/login', user, thunkAPI);
-});
+export const loginUser = createAsyncThunk(
+  "user/loginUser",
+  async (user, thunkAPI) => {
+    return loginUserThunk("/auth/login", user, thunkAPI);
+  }
+);
 
-export const updateUser = createAsyncThunk('user/updateUser', async (user, thunkAPI) => {
-  return updateUserThunk('/auth/updateUser', user, thunkAPI);
-});
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (user, thunkAPI) => {
+    return updateUserThunk("/auth/updateUser", user, thunkAPI);
+  }
+);
+
+export const clearStore = createAsyncThunk("user/clearStore", clearStoreThunk);
 
 const initialState = {
   isLoading: false,
@@ -27,7 +42,7 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     logoutUser: (state, { payload }) => {
@@ -85,6 +100,10 @@ const userSlice = createSlice({
     [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
+    },
+
+    [clearStore.rejected]: () => {
+      toast.error("There was an error");
     },
   },
 });
